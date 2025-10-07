@@ -8,19 +8,19 @@ using namespace std;
 
 class Solution {
 public:
-    int numWaterBottles(int numBottles, int numExchange) {
-        
-        int result = numBottles;
-        ;
-        
-        while (numBottles > 0 &&  numBottles / numExchange > 0 ) {
-            result +=  (numBottles / numExchange);
-            numBottles = numBottles - ((numBottles / numExchange) * numExchange)  + (numBottles / numExchange);
+    int maxBottlesDrunk(int numBottles, int numExchange) {
+        int bottleDrunk = numBottles;
+        int emptyBottles = numBottles;
+
+        while (emptyBottles >= numExchange) {
+            emptyBottles -= numExchange; // use empties for exchange
+            numExchange++;               // cost of exchange increases
+            bottleDrunk++;               // got one more bottle
+            emptyBottles++;              // the new bottle becomes empty
         }
-
-
-        return result;
+        return bottleDrunk;
     }
+
 };
 
 
@@ -32,7 +32,7 @@ int main() {
     cout << solution.numWaterBottles(numBottles, numExchange) << endl; // Expected 2.00000
     */
     int numBottles1 = 9, numExchange1 = 3;
-    cout << solution.numWaterBottles(numBottles1, numExchange1) << endl; // Expected 2.00000
+    cout << solution.maxBottlesDrunk(numBottles1, numExchange1) << endl; // Expected 2.00000
 
     return 0;
 }
